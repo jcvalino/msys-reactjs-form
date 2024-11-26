@@ -1,6 +1,6 @@
-import { Fragment } from 'react';
+import { Fragment } from "react";
 
-import { cn } from './../utilities';
+import { cn } from "./../utilities";
 
 type Props = {
   children: React.ReactNode;
@@ -24,7 +24,7 @@ const Card = ({
   return (
     <div
       className={cn(
-        'bg-interface h-max space-y-4 rounded border py-5 shadow',
+        "bg-interface h-max space-y-4 rounded border py-5 shadow",
         className
       )}
     >
@@ -51,7 +51,7 @@ const Card = ({
           )}
         </section>
       )}
-      <section className={cn('px-5', bodyClassName)}>{children}</section>
+      <section className={cn("px-5", bodyClassName)}>{children}</section>
       {Boolean(actionElements) && (
         <section className="flex space-x-1 px-5">
           {actionElements!.map((el, i) => (

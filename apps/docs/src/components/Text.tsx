@@ -122,11 +122,10 @@ function isTextLabel(props: any): props is LabelTextProps {
   return props.as == "label" && "htmlFor" in props;
 }
 
-function hasLineHeight(props: any): props is TextWithLineHeight {
+function hasLineHeight(_props: any): _props is TextWithLineHeight {
   return true;
 }
 
-// eslint-disable-next-line no-redeclare
 const Text = ({
   as: Component = "span",
   children,

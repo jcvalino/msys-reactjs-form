@@ -1,11 +1,11 @@
-import { useMemo } from 'react';
+import { useMemo } from "react";
 
-import { cn } from './../utilities';
+import { cn } from "./../utilities";
 
-import FormFieldWrapper from './FormFieldWrapper';
-import Text from './Text';
+import FormFieldWrapper from "./FormFieldWrapper";
+import Text from "./Text";
 
-import './ToggleSwitch.css';
+import "./ToggleSwitch.css";
 
 type FieldError = {
   message: string;
@@ -14,13 +14,13 @@ type FieldError = {
 type DiscriminatedTitleProps<
   TOnValue = true,
   TOffValue = false,
-  TValue = TOnValue | TOffValue,
+  TValue = TOnValue | TOffValue
 > =
   | {
       title: string | ((value: NoInfer<TValue>) => string);
       description?: string | ((value: NoInfer<TValue>) => string);
       contained?: boolean;
-      switchPosition?: 'trailing' | 'leading';
+      switchPosition?: "trailing" | "leading";
     }
   | {
       title?: never;
@@ -32,7 +32,7 @@ type DiscriminatedTitleProps<
 type DiscriminatedInlineProps<
   TOnValue = true,
   TOffValue = false,
-  TValue = TOnValue | TOffValue,
+  TValue = TOnValue | TOffValue
 > =
   | {
       inline: true;
@@ -47,7 +47,7 @@ type DiscriminatedInlineProps<
 type Props<
   TOnValue = true,
   TOffValue = false,
-  TValue = TOnValue | TOffValue,
+  TValue = TOnValue | TOffValue
 > = {
   name?: string;
   value: TValue;
@@ -71,17 +71,17 @@ function FormSwitch<const TOnValue, const TOffValue>({
   title,
   description,
   contained = false,
-  switchPosition = 'leading',
+  switchPosition = "leading",
   error,
   ...rest
 }: Props<TOnValue, TOffValue>) {
   const onValue = onV ?? true;
   const offValue = offV ?? false;
-  const isLeading = switchPosition === 'leading';
+  const isLeading = switchPosition === "leading";
 
   const label = useMemo(() => {
     if (rest.inline) return undefined;
-    return typeof rest.label === 'function' ? rest.label(value) : rest.label;
+    return typeof rest.label === "function" ? rest.label(value) : rest.label;
   }, [rest]);
 
   return (
@@ -95,12 +95,12 @@ function FormSwitch<const TOnValue, const TOffValue>({
     >
       <div
         className={cn(
-          'flex w-full items-center',
-          contained && 'rounded border bg-interface px-4 py-3',
-          isLeading ? 'space-x-3' : 'flex-row-reverse justify-between'
+          "flex w-full items-center",
+          contained && "rounded border bg-interface px-4 py-3",
+          isLeading ? "space-x-3" : "flex-row-reverse justify-between"
         )}
       >
-        <div className={cn('toggle-switch')}>
+        <div className={cn("toggle-switch")}>
           <input
             id={`id-${name}`}
             data-test-id={testId}
@@ -114,11 +114,11 @@ function FormSwitch<const TOnValue, const TOffValue>({
         {title ? (
           <div className="flex flex-col space-y-1">
             <Text weight="medium" size="body" className="text">
-              {typeof title === 'function' ? title(value) : title}
+              {typeof title === "function" ? title(value) : title}
             </Text>
             {description && (
               <Text weight="normal" size="caption" className="text-subtle">
-                {typeof description === 'function'
+                {typeof description === "function"
                   ? description(value)
                   : description}
               </Text>

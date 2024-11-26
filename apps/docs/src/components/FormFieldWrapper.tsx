@@ -1,7 +1,7 @@
-import { useMemo } from 'react';
-import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { useMemo } from "react";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 
-import { cn } from './../utilities';
+import { cn } from "./../utilities";
 
 type FieldError = {
   message: string;
@@ -52,7 +52,7 @@ const FormFieldWrapper = ({
           {label}
           {optional && !readOnly ? (
             <>
-              {' - '}
+              {" - "}
               <span className="font-light italic">optional</span>
             </>
           ) : null}
@@ -62,9 +62,9 @@ const FormFieldWrapper = ({
       {!inline && (
         <small
           className={cn(
-            '!mt-0.5 flex min-h-[1rem] items-center space-x-1 text-xs text',
-            (!error && !helpText) || readOnly ? 'invisible' : '',
-            error ? 'text-onDanger-subtle' : ''
+            "!mt-0.5 flex min-h-[1rem] items-center space-x-1 text-xs text",
+            (!error && !helpText) || readOnly ? "invisible" : "",
+            error ? "text-onDanger-subtle" : ""
           )}
         >
           {error ? (
