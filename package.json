@@ -11,6 +11,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "tslib": "^2.8.1",
     "turbo": "1.13.3"
   },
   "workspaces": [
