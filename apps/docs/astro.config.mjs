@@ -1,10 +1,13 @@
-import { defineConfig } from "astro/config";
-import starlight from "@astrojs/starlight";
+import mdx from "@astrojs/mdx";
+import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
+import starlight from "@astrojs/starlight";
+import { defineConfig } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [
+    react(),
     starlight({
       favicon: "./src/assets/favicon.ico",
       title: "",
@@ -71,7 +74,7 @@ export default defineConfig({
             },
             {
               label: "Multiverse UI",
-              link: "/integrations/msys-ui/",
+              link: "/integrations/multiverse/",
             },
           ],
         },
@@ -80,7 +83,7 @@ export default defineConfig({
           items: [
             {
               label: "v0 to v1",
-              link: "/migragtions/v0tov1/",
+              link: "/migrations/v0tov1/",
             },
           ],
         },
@@ -88,5 +91,6 @@ export default defineConfig({
       customCss: ["./src/tailwind.css"],
     }),
     tailwind({ applyBaseStyles: false }),
+    mdx(),
   ],
 });
