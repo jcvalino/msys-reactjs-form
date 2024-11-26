@@ -1,0 +1,11 @@
+{
+  "$schema": "https://multiverse.multisyscorp.com/schema.json",
+  "tailwind": {
+    "css": "src/tailwind.css",
+    "config": "tailwind.config.mjs"
+  },
+  "directory": {
+    "components": "src/components",
+    "utilities": "src"
+  }
+}
