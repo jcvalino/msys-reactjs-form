@@ -3,12 +3,79 @@ title: Quickstart
 description: A guide in my new Starlight docs site.
 ---
 
-import { Aside } from "@astrojs/starlight/components";
+import { Steps, Tabs, TabItem, Code } from "@astrojs/starlight/components";
 
-<Aside type="tip">
+<Steps>
 
-- react-geek-form is a React form library built on top of `react-hook-form` and `zod`
+1. Install `react-geek-form` and `zod`, run:
 
-- Designed to simplify the process of creating forms with custom field components and Zod schemas for validation. With a focus on extensibility and reusability, this library allows developers to create flexible forms while enforcing validation rules.
+   <Tabs>
+     <TabItem label="npm">
+       <Code code="npm install react-geek-form zod" lang="bash" />
+     </TabItem>
+     <TabItem label="pnpm">
+       <Code code="pnpm add react-geek-form zod" lang="bash" />
+     </TabItem>
+     <TabItem label="yarn">
+       <Code code="yarn add react-geek-form zod" lang="bash" />
+     </TabItem>
+   </Tabs>
 
-</Aside>
+2. Register your custom fields using `createInstance`:
+
+   ```tsx title=helper.tsx
+   import { createInstance } from "react-geek-form";
+
+   // Example Custom Field Components
+   const CustomInput = ({ value, onChange, error }) => (
+     <input value={value} onChange={(e) => onChange(e.target.value)} />
+   );
+
+   const CustomTextarea = ({ value, onChange, error }) => (
+     <textarea value={value} onChange={(e) => onChange(e.target.value)} />
+   );
+
+   // Create the instance with Custom Field Components
+   const { createForm } = createInstance({
+     CustomInput,
+     CustomTextarea,
+     // ...[Custom Fields Components]
+   });
+
+   // Export createForm for reuse across your app
+   export { createForm };
+   ```
+
+3. Create your first Form component using `createForm`:
+
+   ```tsx title=App.tsx
+   import { z } from "zod";
+   import { createForm } from "./helpers";
+
+   const { forwardFormContext, CustomInput, CustomTextarea } = createForm({
+     zodSchema: z.object({
+       first_name: z.string(),
+       middle_name: z.string(),
+       last_name: z.string(),
+       bio: z.string(),
+     }),
+   });
+
+   const App = forwardFormContext((_, ctx) => {
+     return (
+       <form onSubmit={ctx.handleSubmit((values) => console.log(values))}>
+         CustomTextarea component will be like as below.
+         <CustomInput name="first_name" /> {/* Valid */}
+         <CustomInput name="middle_name" /> {/* Valid */}
+         <CustomInput name="last_name" /> {/* Valid */}
+         {/* <CustomInput name="address" /> Invalid; Type error: 'address' is not in the schema */}
+         <CustomTextarea name="bio" /> {/* Valid */}
+         <button type="submit">Submit</button>
+       </form>
+     );
+   });
+
+   export default App;
+   ```
+
+</Steps>
