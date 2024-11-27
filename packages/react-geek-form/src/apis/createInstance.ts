@@ -56,22 +56,21 @@ const createInstance = <
         ? FormField["name"]
         : never]: <
         TNoStrict extends boolean = false,
-        OmittedProps = Omit<
-          React.ComponentProps<FormField["component"]>,
-          "value" | "error" | "name"
-        > & { name: string }
+        TOmittedProps = (React.ComponentProps<FormField["component"]> & {
+          value: never;
+          error: never;
+        }) & {
+          name: string;
+          onChange?: React.ComponentProps<FormField["component"]>["onChange"];
+        }
       >(
-        props: MakePropertyOptional<
-          {
-            [K in keyof OmittedProps]: K extends "name"
-              ? TNoStrict extends false
-                ? FieldPath<InferedSchema>
-                : string
-              : OmittedProps[K];
-          },
-          // @ts-expect-error
-          "onChange"
-        > & {
+        props: TOmittedProps & {
+          [K in keyof TOmittedProps]: K extends "name"
+            ? TNoStrict extends false
+              ? FieldPath<InferedSchema>
+              : string
+            : TOmittedProps[K];
+        } & {
           noStrict?: TNoStrict;
         }
       ) => JSX.Element;
